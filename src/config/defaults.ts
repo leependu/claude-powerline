@@ -22,7 +22,13 @@ export const DEFAULT_CONFIG: PowerlineConfig = {
             showUpstream: false,
             showRepoName: false,
           },
-          model: { enabled: true },
+          model: { 
+            enabled: true,
+            modelIcons: {
+              sonnet: "🐱",
+              opus: "🦁"
+            }
+          },
           session: { enabled: true, type: "tokens" },
           today: { enabled: false, type: "cost" },
           block: { enabled: true, type: "cost", burnType: "cost" },

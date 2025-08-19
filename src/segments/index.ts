@@ -21,4 +21,5 @@ export {
   BlockSegmentConfig,
   TodaySegmentConfig,
   VersionSegmentConfig,
+  ModelSegmentConfig,
 } from "./renderer";

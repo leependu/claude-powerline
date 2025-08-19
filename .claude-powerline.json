@@ -6,7 +6,13 @@
       {
         "segments": {
           "directory": { "enabled": true, "showBasename": true },
-          "model": { "enabled": true },
+          "model": { 
+            "enabled": true,
+            "modelIcons": {
+              "sonnet": "🐱",
+              "opus": "🦁"
+            }
+          },
           "session": { "enabled": true, "type": "both" },
           "today": { "enabled": true, "type": "both" }
         }

@@ -50,6 +50,15 @@ export interface TodaySegmentConfig extends SegmentConfig {
 
 export interface VersionSegmentConfig extends SegmentConfig {}
 
+export interface ModelSegmentConfig extends SegmentConfig {
+  customIcon?: string;           // Universal custom icon for all models
+  modelIcons?: {                 // Model-specific icons
+    opus?: string;
+    sonnet?: string;
+    [key: string]: string | undefined;  // For future models
+  };
+}
+
 export type AnySegmentConfig =
   | SegmentConfig
   | DirectorySegmentConfig
@@ -60,7 +69,8 @@ export type AnySegmentConfig =
   | MetricsSegmentConfig
   | BlockSegmentConfig
   | TodaySegmentConfig
-  | VersionSegmentConfig;
+  | VersionSegmentConfig
+  | ModelSegmentConfig;
 
 import {
   formatCost,
@@ -247,12 +257,48 @@ export class SegmentRenderer {
     };
   }
 
+  private resolveModelIcon(
+    modelName: string,
+    config?: ModelSegmentConfig
+  ): string {
+    // Default fallback
+    const defaultIcon = "⚡";
+    
+    if (!config) {
+      return defaultIcon;
+    }
 
-  renderModel(hookData: ClaudeHookData, colors: PowerlineColors): SegmentData {
+    // Check for model-specific icons first (highest priority)
+    if (config.modelIcons) {
+      const lowerModelName = modelName.toLowerCase();
+      
+      // Check each configured model icon for partial matches
+      for (const [modelKey, icon] of Object.entries(config.modelIcons)) {
+        if (icon && lowerModelName.includes(modelKey.toLowerCase())) {
+          return icon;
+        }
+      }
+    }
+
+    // Fall back to universal custom icon if set
+    if (config.customIcon) {
+      return config.customIcon;
+    }
+
+    // Final fallback to default
+    return defaultIcon;
+  }
+
+  renderModel(
+    hookData: ClaudeHookData, 
+    colors: PowerlineColors,
+    config?: ModelSegmentConfig
+  ): SegmentData {
     const modelName = hookData.model?.display_name || "Claude";
+    const modelIcon = this.resolveModelIcon(modelName, config);
 
     return {
-      text: `${this.symbols.model} ${modelName}`,
+      text: `${modelIcon} ${modelName}`,
       bgColor: colors.modelBg,
       fgColor: colors.modelFg,
     };

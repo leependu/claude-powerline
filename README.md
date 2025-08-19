@@ -264,13 +264,36 @@ Shows performance analytics from your Claude sessions.
 
 #### Model
 
-Shows current Claude model being used.
+Shows current Claude model being used with customizable icons.
 
 ```json
 "model": {
-  "enabled": true
+  "enabled": true,
+  "customIcon": "🤖",
+  "modelIcons": {
+    "opus": "🦁",
+    "sonnet": "🐱"
+  }
 }
 ```
+
+**Options:**
+
+- `customIcon`: Universal custom icon for all models (fallback)
+- `modelIcons`: Model-specific icons using partial name matching
+  - `opus`: Icon for Opus models (🦁 by default)
+  - `sonnet`: Icon for Sonnet models (🐱 by default)  
+  - Custom model names can be added as needed
+
+**Icon Resolution Priority:**
+1. Model-specific icon (if model name contains the key)
+2. Universal custom icon
+3. Default ⚡ icon
+
+**Examples:**
+- `claude-3-5-sonnet-20241022` → matches "sonnet" → 🐱
+- `claude-3-opus-20240229` → matches "opus" → 🦁
+- `claude-4-sonnet-20250514` → matches "sonnet" → 🐱
 
 ---
 
