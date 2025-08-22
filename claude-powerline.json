@@ -1,0 +1,50 @@
+{
+  "theme": "custom",
+  "display": {
+    "style": "minimal",
+    "lines": [
+      {
+        "segments": {
+          "directory": { "enabled": true, "showBasename": true },
+          "git": {
+            "enabled": true,
+              "showSha": false,
+              "showWorkingTree": false,
+              "showOperation": false,
+              "showTag": false,
+              "showTimeSinceCommit": false,
+              "showStashCount": false,
+              "showUpstream": false,
+              "showRepoName": false
+          },
+          "model": { 
+            "enabled": true,
+            "modelIcons": {
+              "sonnet": "🐷",
+              "opus": "🐗"
+            }
+          },
+          "context": { "enabled": true }
+        }
+      },
+      {
+        "segments": {
+          "session": { "enabled": true, "type": "both" },
+          "block": { "enabled": true, "type": "time", "burnType": "none" },
+	        "today": { "enabled": true, "type": "both" }
+        }
+      }
+    ]
+  },
+  "colors": {
+    "custom": {
+      "directory": { "bg": "#56b6c2", "fg": "#f2f2f2" },
+      "git": { "bg": "#61afef", "fg": "#f2f2f2" },
+      "model": { "bg": "#e06c75", "fg": "#f2f2f2" },
+      "context": { "bg": "#e5c07b", "fg": "#f2f2f2" },
+      "session": { "bg": "#98c379", "fg": "#f2f2f2" },
+      "block": { "bg": "#c678dd", "fg": "#f2f2f2" },
+      "today": { "bg": "#56b6c2", "fg": "#f2f2f2" }
+    }
+  }
+}
